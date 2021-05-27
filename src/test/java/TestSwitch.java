@@ -31,12 +31,11 @@ public class TestSwitch {
 
         // Act
         HomePage amazonHomePage = new HomePage(driver);
-        boolean containsTitle = amazonHomePage
-                .writeSearchBar(item)
-                .enterSearchSubmitButton()
-                .openFirstResult()
-                .containsProductTitleResult(item);
+        String productTitle = amazonHomePage
+                .search(item)
+                .openResult(0)
+                .getProductTitle();
 
-        Assert.assertTrue(containsTitle, "Title does not contains what was written in the search bar");
+        Assert.assertTrue(productTitle.contains(item), "Title does not contains what was written in the search bar");
     }
 }

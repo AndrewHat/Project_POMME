@@ -4,23 +4,17 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage {
     WebDriver driver;
+    By textSearchBarSelector = By.id("twotabsearchtextbox");
+    By buttonSubmitSelector = By.id("nav-search-submit-button");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public HomePage writeSearchBar(String text) {
-        WebElement textSearchBarElement= driver.findElement(By.id("twotabsearchtextbox"));
-        textSearchBarElement.sendKeys(text);
-
-        return this;
-    }
-
-    public SearchResultPage enterSearchSubmitButton() {
-        WebElement buttonElement = driver.findElement(By.id("nav-search-submit-button"));
-        buttonElement.click();
+    public SearchResultPage search(String text) {
+        driver.findElement(textSearchBarSelector).sendKeys(text);
+        driver.findElement(buttonSubmitSelector).click();
 
         return new SearchResultPage(driver);
     }
-
 }
