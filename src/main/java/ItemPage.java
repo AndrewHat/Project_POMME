@@ -11,9 +11,7 @@ public class ItemPage {
     }
 
     public String getProductTitle() {
-        WebElement titleElement = driver.findElement(titleSelector);
-
-        return titleElement.getText();
+        return driver.findElement(titleSelector).getText();
     }
 
 }
