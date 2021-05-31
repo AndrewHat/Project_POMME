@@ -1,3 +1,4 @@
+import PageObject.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,6 +37,33 @@ public class TestSwitch {
                 .openResult(0)
                 .getProductTitle();
 
-        Assert.assertTrue(productTitle.contains(item), "Title does not contains what was written in the search bar");
+        Assert.assertTrue(productTitle.contains(item), "Title does not contains: " + item);
+    }
+
+    @Test
+    public void testMultipleSearch() {
+        // Arrange
+        String ps5 = "PlayStation 5";
+        String nin = "Nintendo Switch";
+        String xbox = "Xbox";
+
+        // Act
+        HomePage amazonHomePage = new HomePage(driver);
+        String title = amazonHomePage.search(ps5)
+                .openResult(0)
+                .search(nin)
+                .openResult(5)
+                .search(xbox)
+                .openResult(2)
+                .getProductTitle();
+
+        // Assert
+        Assert.assertTrue(title.contains(xbox), "Title does not contains: " + xbox);
+    }
+
+    @Test
+    public void openAccountList() {
+        HomePage amazonHomePage = new HomePage(driver);
+        amazonHomePage.openAccountList();
     }
 }
